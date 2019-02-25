@@ -5,6 +5,10 @@ var moment = require('moment');
 
 var Todo = AV.Object.extend('Todo');
 
+function form_time(item){
+  return moment(item).format('YYYY-MM-DD HH:mm:ss')
+}
+
 // 查询 Todo 列表
 router.get('/list', function (req, res, next) {
   var query = new AV.Query(Todo);
@@ -13,20 +17,19 @@ router.get('/list', function (req, res, next) {
 
     // 接口数据的返回
     res.writeHead(200, {'Content-Type': 'application/json'});
-    const res_res=[]
+    const res_response={res_res:[],code:"0000",msg:"返回成功"};
     for(let i=0;i<results.length;i++){
       let item = results[i];
-      item.createdAt =  moment(item.get('createdAt')).format('YYYY-MM-DD HH:mm:ss')
-      item.updatedAt =  moment(item.get('updatedAt')).format('YYYY-MM-DD HH:mm:ss')
+      item.createdAt =  form_time(item.get('createdAt'));
+      item.updatedAt =  form_time(item.get('updatedAt'));
       if(item.get('content').trim()) {
-        res_res.push(item)
+        res_response.res_res.push(item)
       }
     }
-    res.end(JSON.stringify(res_res));
-
+    res.end(JSON.stringify(res_response));
   }, function (err) {
     if (err.code === 101) {
-      // 该错误的信息为：{ code: 101, message: 'Class or object doesn\'t exists.' }，说明 Todo 数据表还未创建，所以返回空的 Todo 列表。
+      // 该错误的信息为：{ code: 101, message: 'Class or object doesn\'t exists.' }，说明
       // 具体的错误代码详见：https://leancloud.cn/docs/error_code.html
       res.render('todos', {
         title: 'TODO 列表',
