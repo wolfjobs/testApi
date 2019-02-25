@@ -13,15 +13,15 @@
 
 #### 安装教程
 
-#####1、<a href="https://leancloud.cn">注册leancloud账号</a>
+#####   1、<a href="https://leancloud.cn">注册leancloud账号</a>
 
-#####2、<a href="https://leancloud.cn/dashboard/applist.html#/newapp">创建应用</a>
+#####   2、<a href="https://leancloud.cn/dashboard/applist.html#/newapp">创建应用</a>
 
-#####3、<a href="https://leancloud.cn/docs/leanengine_cli.html">安装lean命令行工具</a>
+#####   3、<a href="https://leancloud.cn/docs/leanengine_cli.html">安装lean命令行工具</a>
     brew update
     brew install lean-cli
 
-#####4、基于leanCloud按照<a href="https://leancloud.cn/docs/leanengine_quickstart.html">云引擎快速入门</a>文档：
+#####   4、基于leanCloud按照<a href="https://leancloud.cn/docs/leanengine_quickstart.html">云引擎快速入门</a>文档：
 
     lean init
     
