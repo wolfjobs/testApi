@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Todo</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <style>
+        table {
+            border-spacing: 0;
+            margin-top: 50px;
+        }
+
+        table > tbody > tr > td:first-child{
+            text-align: center;
+        }
+        table > thead > tr > th, table > tbody > tr > td {
+            border: 1px solid #e5e5e5;
+            padding: 3px 6px;
+        }
+    </style>
+</head>
+<body>
+<h1><%= title %></h1>
+<form action="/todos" method="POST">
+    <input type="text" name="content" onfocus="javascript:this.value=''" minlength="5"/>
+    <input type="submit" value="新增"/>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>内容</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+    </tr>
+    </thead>
+    <% for(var i = 0; i < todos.length; i++) { %>
+        <tr>
+            <td><%= i + 1 %></td>
+            <td><%= todos[i].get('content') %></td>
+            <td><%= moment(todos[i].createdAt).format('YYYY-MM-DD HH:mm:ss') %></td>
+            <td><%= moment(todos[i].updatedAt).format('YYYY-MM-DD HH:mm:ss') %></td>
+        </tr>
+        <tr>
+            <td colspan="4"><%= JSON.stringify(todos[i]) %></td>
+        </tr>
+    <% } %>
+</table>
+</body>
+</html>
